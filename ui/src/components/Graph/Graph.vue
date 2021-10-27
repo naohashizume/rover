@@ -320,6 +320,9 @@ export default {
       let cy = this.$refs.cy.instance;
       let el = cy.elements();
       const nodesNames = this.graph.nodes.map((x) => x.data.id);
+      console.log('-----------------line 323-----------------');
+      console.log(nodesNames);
+      console.log('------------------------------------------');
 
       // Reset graph
       cy.remove(el);
@@ -342,6 +345,9 @@ export default {
         while (!nodesNames.includes(name)) {
           name = name.split(".");
           if (name.length < 2) {
+            console.log('-----------------line 348-----------------');
+            console.log(n.data.target);
+            console.log('-------------------------------------------');
             console.warn("edge target", n.data.target, "not found in nodes");
             return;
           }
@@ -351,6 +357,10 @@ export default {
         n.data.target = name;
 
         // Add edge to the final graph
+        console.log('-----------------line 360-----------------');
+        console.log('Add edge to the final graph')
+        console.log(n.data.target);
+        console.log('-------------------------------------------');
         cy.add(n);
       });
 
@@ -512,9 +522,16 @@ export default {
     if (typeof graph !== "undefined") {
       // eslint-disable-next-line no-undef
       this.graph = graph;
+      console.log('-----------------line 524-----------------');
+      console.log(this.graph);
+      console.log('------------------------------------------');
+
       this.renderGraph();
     } else {
       axios.get(`/api/graph`).then((response) => {
+        console.log('-----------------line 531-----------------');
+        console.log(response);
+        console.log('------------------------------------------');
         this.graph = response.data;
         this.renderGraph();
       });
